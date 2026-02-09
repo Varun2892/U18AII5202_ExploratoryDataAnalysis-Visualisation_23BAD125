@@ -17,13 +17,13 @@ ggparcoord(
   groupColumn = "Customer_Segment",
   scale = "uniminmax"
 ) +
-  labs(title = "Parallel Coordinate Plot (Roll No: 23BAD100)") +
+  labs(title = "Parallel Coordinate Plot (Roll No: 23BAD125)") +
   theme_minimal()
 
 ggplot(data, aes(x = Sales, y = Profit, size = Discount, color = Customer_Segment)) +
   geom_point(alpha = 0.6) +
   labs(
-    title = "Bubble Chart: Sales vs Profit (Roll No: 23BAD100)",
+    title = "Bubble Chart: Sales vs Profit (Roll No: 23BAD125)",
     x = "Sales",
     y = "Profit"
   ) +
@@ -34,7 +34,7 @@ xyplot(
   data = data,
   type = c("p", "r"),
   layout = c(3, 2),
-  main = "Trellis Display by Region (Roll No: 23BAD100)",
+  main = "Trellis Display by Region (Roll No: 23BAD125)",
   xlab = "Sales",
   ylab = "Profit"
 )
