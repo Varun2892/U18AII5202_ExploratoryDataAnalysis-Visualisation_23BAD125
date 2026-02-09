@@ -4,7 +4,7 @@
 
 ## Author
 
-**Varun Srinivas**
+** Varun Srinivas **
 23BAD125
 
 ---
@@ -86,3 +86,4 @@ The experiment successfully highlights:
 * README
 
 ---
+
