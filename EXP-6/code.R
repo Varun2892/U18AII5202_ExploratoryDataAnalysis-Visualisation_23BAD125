@@ -1,40 +1,50 @@
-library(GGally)
 library(ggplot2)
-library(lattice)
+library(GGally)
+library(dplyr)
 
-data <- read.csv("C:/Users/student/Downloads/6.retail_business.csv")
+retail_data <- read.csv("C:/Users/student/Downloads/6.retail_business.csv")
 
-data$Customer_Segment <- as.factor(data$Customer_Segment)
-data$Region <- as.factor(data$Region)
+retail_data <- na.omit(retail_data)
 
 ggparcoord(
-  data,
-  columns = c(
-    which(names(data) == "Sales"),
-    which(names(data) == "Profit"),
-    which(names(data) == "Discount")
-  ),
-  groupColumn = "Customer_Segment",
-  scale = "uniminmax"
+  data = retail_data,
+  columns = which(names(retail_data) %in% c("Sales", "Profit")),
+  groupColumn = which(names(retail_data) == "Customer_Segment"),
+  scale = "uniminmax",
+  showPoints = TRUE
 ) +
-  labs(title = "Parallel Coordinate Plot (Roll No: 23BAD125)") +
-  theme_minimal()
-
-ggplot(data, aes(x = Sales, y = Profit, size = Discount, color = Customer_Segment)) +
-  geom_point(alpha = 0.6) +
   labs(
-    title = "Bubble Chart: Sales vs Profit (Roll No: 23BAD125)",
-    x = "Sales",
-    y = "Profit"
+    title = "Parallel Coordinate Plot for Sales and Profit",
+    color = "Customer Segment"
   ) +
   theme_minimal()
 
-xyplot(
-  Profit ~ Sales | Region,
-  data = data,
-  type = c("p", "r"),
-  layout = c(3, 2),
-  main = "Trellis Display by Region (Roll No: 23BAD125)",
-  xlab = "Sales",
-  ylab = "Profit"
-)
+ggplot(retail_data, aes(
+  x = Sales,
+  y = Profit,
+  size = Sales,
+  color = Customer_Segment
+)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "Bubble Chart: Sales vs Profit",
+    x = "Sales",
+    y = "Profit",
+    size = "Sales"
+  ) +
+  theme_minimal()
+
+ggplot(retail_data, aes(
+  x = Sales,
+  y = Profit,
+  color = Customer_Segment
+)) +
+  geom_point(alpha = 0.7) +
+  facet_wrap(~ Region) +
+  labs(
+    title = "Trellis Display of Sales vs Profit by Region",
+    x = "Sales",
+    y = "Profit",
+    color = "Customer Segment"
+  ) +
+  theme_minimal()
